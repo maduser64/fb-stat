@@ -4,7 +4,13 @@
 	This script was made by Enrico `tpaper' Ronconi in Nov 2014
 	<ronconi.enrico@yahoo.it>
 */
-
+/*
+  I'm a poor electronic engineering student and I don't ask you money.
+  The only thing that I ask you is **PLEASE GIVE ME CREDITS** by
+  linking this page and/or writing somewhere my name if you are going
+  to publish some data analisys based on data retrieved using this script.
+  Thank you, man.
+*/
 /*
 	This program is free software: you can redistribute it and/or modify it
 	under the terms of the GNU General Public License as published by the
