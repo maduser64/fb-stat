@@ -58,12 +58,11 @@ Simple Facebook group data crawler tool.
   - Post author (unique ID and name)
   - Post type (eg. state, photo, link ...)
   - Post creation date
-  - Total count of likes to the post
+  - Total count of likes/reaction\* to the post
   - Total of comments to the post
   - Author (unique ID and name) of the first post comment (if any)
-  - Total count of each reaction\*
   
-  \* **Reaction are available only with API v2.6 or higher**
+  \* **Reaction are available only with API v2.6 or higher**, for versions <= 2.5 only likes are counted.
     
 #System requirements
   This script is designed do be ran in a unix-like system, anyway since
