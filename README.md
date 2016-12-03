@@ -83,3 +83,6 @@ Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmai
   one line per post, so you can check in real time the number of post
   analyzed using, for example:
   ```wc -l out.csv```
+  
+#To do:
+  - [ ] Use the same https connection for all the requests in order to speed up the process.
