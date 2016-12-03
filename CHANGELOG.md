@@ -1,8 +1,9 @@
 #CHANGELOG
 
 ## v0.6 - 3 Dec 2016
-  - Added support for reactions
-  
+  - Added support for reactions is using API >= v2.6
+  - Minor changes to logging options
+    
 ## v0.5b - 29 Nov 2016
   - Now is possible to select the Graph API version to use
   - Now the target group and mysql table name are read from cmd line arguments
