@@ -1,7 +1,13 @@
 # fb-stat
 
-Facebook group data crawler tool
+Simple Facebook group data crawler tool.
 
+#Usage
+  ```php fbstat.php group-id [mysql_table_name]```
+   - group-id -> the facebook id of the target group.
+   - mysql_table_name -> MySQL table name. Required only if you have choose
+   to auto import data in a MySQL database.
+   
 #What it does
   This script dumps infos about posts in a specific given group.
   It saves that data into CVS file and (if required) it imports that data
@@ -21,6 +27,7 @@ Facebook group data crawler tool
   - **user-groups**, if using Graph API v2.3 or previous
   - **user-managed-groups**, if using for Graph API v2.4 or higher
   
+  
   **IMPORTANT NOTE:**
   If you use Graph API v2.3 or previous, you can use an access token with
   user-groups permission to analyze groups, even secret, that **you are
@@ -28,7 +35,17 @@ Facebook group data crawler tool
   
   Unfortunately with API v2.4 the permission user-group was deprecated
   and you can only use user-managed-groups to analyze groups that **you
-  are an __admin__ of**. 
+  are an _admin_ of**. Be a group moderator is **not** enough.
+  
+  So, in few words, you can use API <=v2.3 to analyze every group you
+  are member of *BUT* you can not see reactions (they are available
+  only for API >=2.6) and you know that old API versions will be
+  discontinued.
+  
+  **OR**
+  
+  You can use the lastest API (v2.8, today) *BUT* you must be an
+  admin of the group.
   
 #Informations stored
   Currently, the information dumped are:
