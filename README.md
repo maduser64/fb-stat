@@ -2,6 +2,13 @@
 
 Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmail.com>
 
+#Licensing
+  I'm a poor electronic engineering student but I don't ask you money.
+  The only thing that I ask you is **PLEASE GIVE ME CREDITS** by
+  linking this page and/or writing somewhere my name if you are going
+  to publish some data anlisys based on data retrieved using this script.
+  Thank you, man.
+  
 #Usage
   The first part of the script contains the settings, make sure that
   everything is ok, then use:
