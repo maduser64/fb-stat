@@ -53,7 +53,7 @@ $MYSQL_port = '3306';						//MySQL server port
 $MYSQL_username = 'php';					//MySQL username. Obviously that user must have permission to insert data into $MYSQL_table
 $MYSQL_password = '';		//If you need explanation for this var, you have to consider the idea of deleting this script from your pc and go swimming
 $MYSQL_db = 'fbstat';						//MySQL database name
-//$MYSQL_table = 'CACICL_stat';				//MySQL table name - now from argument 2
+//$MYSQL_table = '';				//MySQL table name - now from argument 2
 $MYSQL_table = $argv[2];
 
 $MYSQL_fields_list = ['ID','uid','uname','type','date','ln','cn','fc_uid','fc_uname']; //Fields name in the MySQL table. This order MUST be the same of the order in the parse_and_write function.
