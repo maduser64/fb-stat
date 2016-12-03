@@ -35,9 +35,9 @@ Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmai
   the feed.
   
 #Permissions
-  To use this script you must provide a valid facebook user access token
+  To use this script you must provide a valid Facebook user access token
   (you can genereate it, for example, using Graph API explorer).
-  The permission required are:
+  The permission required is:
   - **user-groups**, if using Graph API v2.3 or previous
   - **user-managed-groups**, if using for Graph API v2.4 or higher
   
