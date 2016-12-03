@@ -72,7 +72,25 @@ Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmai
   - Author (unique ID and name) of the first post comment (if any)
   
   \* **Reaction are available only with API v2.6 or higher**, for versions <= 2.5 only likes are counted.
-    
+  
+# MySQL table specs
+  Recommended table format:
+  ```
+    +----------+-------------+------+-----+---------+-------+
+	| Field    | Type        | Null | Key | Default | Extra |
+	+----------+-------------+------+-----+---------+-------+
+	| ID       | varchar(33) | NO   | PRI | NULL    |       | post id
+	| uid      | varchar(17) | NO   |     | NULL    |       | user id
+	| uname    | tinytext    | NO   |     | NULL    |       | user name
+	| type     | varchar(10) | NO   |     | NULL    |       | post type
+	| date     | datetime    | NO   |     | NULL    |       | date
+	| ln       | smallint(6) | NO   |     | NULL    |       | likes/reactions count
+	| cn       | smallint(6) | NO   |     | NULL    |       | comments count
+	| fc_uid   | varchar(17) | YES  |     | NULL    |       | first comment user id
+	| fc_uname | tinytext    | YES  |     | NULL    |       | first comment user name
+	+----------+-------------+------+-----+---------+-------+
+  ```
+  
 #System requirements
   This script is designed do be ran in a unix-like system, anyway since
   PHP and MySQL can run under multiple OS, it maybe will work under
