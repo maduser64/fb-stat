@@ -1,6 +1,6 @@
 # fb-stat
 
-Simple Facebook group data crawler tool.
+Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmail.com>
 
 #Usage
   The first part of the script contains the settings, make sure that
