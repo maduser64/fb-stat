@@ -28,7 +28,7 @@ Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmai
   in a MySQL table automatically.
   
 #How it works
-  First, it send an http request to Facebook Graph API, then the response
+  First, it sends an https request to Facebook Graph API, then the response
   (given in JSON format) is parsed, and the data stored into CSV file.
   The response contains also a pointer to the next "page" of posts, so
   the script continues to parse the other page and so on until the end of
@@ -68,7 +68,7 @@ Simple Facebook group data crawler tool. - Enrico Ronconi <enrico.ronconi.p@gmai
   - Post type (eg. state, photo, link ...)
   - Post creation date
   - Total count of likes/reaction\* to the post
-  - Total of comments to the post
+  - Total count of comments to the post
   - Author (unique ID and name) of the first post comment (if any)
   
   \* **Reaction are available only with API v2.6 or higher**, for versions <= 2.5 only likes are counted.
