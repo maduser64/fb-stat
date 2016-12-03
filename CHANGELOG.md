@@ -1,7 +1,7 @@
 #CHANGELOG
 
 ## v0.6 - 3 Dec 2016
-  - Addedd support for reactions
+  - Added support for reactions
   
 ## v0.5b - 29 Nov 2016
   - Now is possible to select the Graph API version to use
