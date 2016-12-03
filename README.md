@@ -3,7 +3,12 @@
 Simple Facebook group data crawler tool.
 
 #Usage
+  The first part of the script contains the settings, make sure that
+  everything is ok, then use:
+  
   ```php fbstat.php group-id [mysql_table_name]```
+  
+  where:
    - group-id -> the facebook id of the target group.
    - mysql_table_name -> MySQL table name. Required only if you have choose
    to auto import data in a MySQL database.
