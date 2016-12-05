@@ -1,16 +1,10 @@
 <?php
-//Version 0.6 - 3 Dic 2016
+//Version 0.6 - 5 Dic 2016
 /*
 	This script was made by Enrico `tpaper' Ronconi in Nov 2014
 	<ronconi.enrico@yahoo.it>
 */
-/*
-  I'm a poor electronic engineering student and I don't ask you money.
-  The only thing that I ask you is **PLEASE GIVE ME CREDITS** by
-  linking this page and/or writing somewhere my name if you are going
-  to publish some data analisys based on data retrieved using this script.
-  Thank you, man.
-*/
+
 /*
 	This program is free software: you can redistribute it and/or modify it
 	under the terms of the GNU General Public License as published by the
@@ -35,7 +29,7 @@ if( $argc < 2 ){
 //-------------------------------------
 
 $verbose = true;						//If true, displays debug messages
-$show_urls = false;						//If true, displays url of every https request
+$show_urls = true;						//If true, displays url of every https request
 $log_filename = 'get_data.log';			//Log file name, IF EXISTING, IT WILL BE DELETED
 $out_filename = 'out.csv';				//Output file name
 $mysql_auto = true;						//If true, the script imports this data into a mysql table automatically
@@ -114,8 +108,8 @@ data that you can retrieve from its servers in one request, if you set this
 value too big Facebook will be very angry and will reply your http request
 with a "fuck off" instead of the data wanted. And nothing will work
 */
-$fb_limit = 400;
-//default: $fb_limit = 400;
+$fb_limit = 350;
+//default: $fb_limit = 350;
 
 $http_tries = 10;			//Number of http tries before give up
 $http_delay = 100;			//Delay between http request tries (mills)
@@ -170,13 +164,19 @@ function http_request($URL,$max_tries,$delay = 100){
 	Send HTTP request and retrieve the response. If get an http error, it
 	tries again $max_tries times every $delay milliseconds
 	*/
-	global $show_urls;
+	global $show_urls,$curl_handle;
 	$tries = 0;
 	$out = false;
 	while(($tries < $max_tries) && ($out == false)){
 		$tries++;
 		if($show_urls) logthis("tryng to open $URL (try $tries of $max_tries)..."); else logthis("asking for data (try $tries of $max_tries)...");
-		$out = @file_get_contents($URL);
+
+
+		//$out = @file_get_contents($URL);
+		curl_setopt($curl_handle, CURLOPT_URL, $URL);
+		$out = curl_exec($curl_handle);
+		if($out[2] == 'e') $out = false;
+
 		if($out == true) {
 			logthis("Success!");
 			return $out;
@@ -205,11 +205,16 @@ function parse_and_write($json_response,$out_handle){
 		
 		if(!$json_response) return false;
 		$out = json_decode($json_response);
-		
+
 		foreach($out->{'data'} as $post){
 			$post_id = $post->{'id'};
-			$user_id = $post->{'from'}->{'id'};
-			$user_name = str_replace($table_record_sep,' ',$post->{'from'}->{'name'});
+			if(property_exists($post,'from')){
+				$user_id = $post->{'from'}->{'id'};
+				$user_name = str_replace($table_record_sep,' ',$post->{'from'}->{'name'});
+			} else {
+				$user_id = 'N/A';
+				$user_name = 'N/A';
+			}
 			$type = $post->{'type'};
 			$created = explode('+',$post->{'created_time'});
 			if($reactions){
@@ -263,19 +268,25 @@ function mysql_import($input_filename){
 
 $log_handle = fopen($log_filename,"w");		//Open log file
 $outfile = fopen($out_filename,"w");		//Open csv out file
+$curl_handle = curl_init();
+curl_setopt($curl_handle, CURLOPT_HEADER, 0);  
+curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);  
 
 logthis("Hi!");								//Welcome message
 
 logthis("Collecting data and saving to file...");
 $stored = 0;
 $next = build_url($fb_access_token,$fb_fileds,$fb_limit,$fb_group_id);	//First URL
-while($next) $next = parse_and_write(http_request($next,$http_tries,$http_delay),$outfile);	//Loop until feed end
+while($next) {
+	$next = parse_and_write(http_request($next,$http_tries,$http_delay),$outfile);	//Loop until feed end
+	echo("Stored $stored posts\n");
+}
 fclose($outfile);														//Close output file
 logthis("$stored posts was saved successfully");
 
 if($mysql_auto) mysql_import($out_filename);
 
 logthis("bye!");		//Goodbye message
-
+curl_close($curl_handle);
 fclose($log_handle);	//Close log file
 ?>
